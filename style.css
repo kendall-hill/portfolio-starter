@@ -7,8 +7,8 @@
   --color-bg-alt: #f5f7fa;
   --color-text: #1a1a2e;
   --color-text-muted: #555577;
-  --color-accent: #4f46e5;
-  --color-accent-hover: #4338ca;
+  --color-accent: #b692e2;
+  --color-accent-hover: #b692e2;
   --color-border: #e2e8f0;
   --font-main: 'Segoe UI', system-ui, sans-serif;
   --radius: 10px;
@@ -16,9 +16,21 @@
   --transition: 0.2s ease;
 }
 
-/* TODO: Add a [data-theme="dark"] block here for dark mode.
-   Copilot can generate this for you — try:
-   "Add a dark mode theme using CSS custom properties" */
+/* Dark mode theme using CSS custom properties. Toggle by setting
+  data-theme="dark" on the <html> or <body> element. */
+:root[data-theme="dark"] {
+  --color-bg: #0f1724;
+  --color-bg-alt: #0b1220;
+  --color-text: #e6eef8;
+  --color-text-muted: #a6b0c3;
+  --color-accent: #544277;
+  --color-accent-hover: #544277;
+  --color-border: rgba(255,255,255,0.06);
+  --font-main: 'Segoe UI', system-ui, sans-serif;
+  --radius: 10px;
+  --shadow: 0 4px 24px rgba(2,6,23,0.6);
+  --transition: 0.2s ease;
+}
 
 /* ============================================================
    RESET & BASE
