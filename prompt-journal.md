@@ -28,6 +28,9 @@ For each entry, note:
 
 ---
 
+
+---
+
 ## Phase 2 — Guided Tasks
 
 ### Entry 2 — About section
