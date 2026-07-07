@@ -84,9 +84,69 @@ function renderSkills() {
 // Ask Copilot (inline chat on this function): "Implement dark mode
 // toggle that saves preference to localStorage"
 // ============================================================
+
 function toggleDarkMode() {
-  // Your implementation here
+  const root = document.documentElement;
+  const currentTheme = root.getAttribute("data-theme");
+  const nextTheme = currentTheme === "dark" ? "light" : "dark";
+
+  root.setAttribute("data-theme", nextTheme);
+  localStorage.setItem("theme", nextTheme);
+
+  const btn = document.getElementById("dark-mode-btn");
+  if (btn) {
+    btn.textContent = nextTheme === "dark" ? "☀️" : "🌙";
+    btn.setAttribute(
+      "aria-label",
+      nextTheme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+    );
+  }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderProjects();
+  renderSkills();
+  updateYear();
+
+  const savedTheme = localStorage.getItem("theme");
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const initialTheme = savedTheme || (prefersDark ? "dark" : "light");
+
+  document.documentElement.setAttribute("data-theme", initialTheme);
+
+  const btn = document.getElementById("dark-mode-btn");
+  if (btn) {
+    btn.addEventListener("click", toggleDarkMode);
+    btn.textContent = initialTheme === "dark" ? "☀️" : "🌙";
+    btn.setAttribute(
+      "aria-label",
+      initialTheme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+    );
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderProjects();
+  renderSkills();
+  updateYear();
+
+  const savedTheme = localStorage.getItem("theme");
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const initialTheme = savedTheme || (prefersDark ? "dark" : "light");
+
+  document.documentElement.setAttribute("data-theme", initialTheme);
+
+  const btn = document.getElementById("dark-mode-btn");
+  if (btn) {
+    btn.addEventListener("click", toggleDarkMode);
+    btn.textContent = initialTheme === "dark" ? "☀️" : "🌙";
+    btn.setAttribute(
+      "aria-label",
+      initialTheme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+    );
+  }
+});
+
 
 // ============================================================
 // UPDATE FOOTER YEAR
