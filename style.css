@@ -24,7 +24,7 @@
   --color-text: #F5F7FA;
   --color-text-muted: #A8B3C7;
   --color-accent: #A78BFA;
-  --color-accent-hover: #8B5CF6;
+  --color-accent-hover: ##8B5CF6;
   --color-border:  #2C3650;
   --font-main: 'Segoe UI', system-ui, sans-serif;
   --radius: 10px;
@@ -350,6 +350,6 @@ footer {
 
   .avatar-placeholder {
     width: 100px;
-    height: 100px;
+    height: 120px;
   }
 }
