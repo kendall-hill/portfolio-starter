@@ -3,13 +3,13 @@
    TODO: Try asking Copilot to suggest a color palette for you.
    ============================================================ */
 :root {
-  --color-bg: #ffffff;
-  --color-bg-alt: #f5f7fa;
-  --color-text: #1a1a2e;
-  --color-text-muted: #555577;
-  --color-accent: #b692e2;
-  --color-accent-hover: #b692e2;
-  --color-border: #e2e8f0;
+  --color-bg: #F7F4FF;
+  --color-bg-alt: #EFE8FA;
+  --color-text: #1F2430;
+  --color-text-muted: #5F6B7A;
+  --color-accent:  #8B5CF6;
+  --color-accent-hover: #7C3AED;
+  --color-border: #E4DDF7;
   --font-main: 'Segoe UI', system-ui, sans-serif;
   --radius: 10px;
   --shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
@@ -19,13 +19,13 @@
 /* Dark mode theme using CSS custom properties. Toggle by setting
   data-theme="dark" on the <html> or <body> element. */
 :root[data-theme="dark"] {
-  --color-bg: #0f1724;
+  --color-bg: #121826;
   --color-bg-alt: #0b1220;
-  --color-text: #e6eef8;
-  --color-text-muted: #a6b0c3;
-  --color-accent: #544277;
-  --color-accent-hover: #544277;
-  --color-border: rgba(255,255,255,0.06);
+  --color-text: #F5F7FA;
+  --color-text-muted: #A8B3C7;
+  --color-accent: #A78BFA;
+  --color-accent-hover: #8B5CF6;
+  --color-border:  #2C3650;
   --font-main: 'Segoe UI', system-ui, sans-serif;
   --radius: 10px;
   --shadow: 0 4px 24px rgba(2,6,23,0.6);
