@@ -7,7 +7,7 @@
   --color-bg-alt: #EFE8FA;
   --color-text: #000000;
   --color-text-muted: #5F6B7A;
-  --color-accent:  #ffffff;
+  --color-accent:  #9175ae;
   --color-accent-hover: #654c81;
   --color-border: #E4DDF7;
   --font-main: 'Segoe UI', system-ui, sans-serif;
@@ -182,9 +182,16 @@ a:hover {
   color: var(--color-accent);
 }
 
+.hero-name {
+  color: #b193d4;
+}
+
+:root[data-theme="dark"] .hero-name {
+  color: #ffffff;
+}
 .hero-subtitle {
   font-size: 1.25rem;
-  color: var(--color-text-muted);
+  color: black (--color-text-muted);
   margin-bottom: 2rem;
 }
 
