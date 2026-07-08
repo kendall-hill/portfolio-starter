@@ -190,9 +190,6 @@ a:hover {
   color: #b193d4;
 }
 
-:root[data-theme="dark"] .hero-name {
-  color: #ffffff;
-}
 .hero-subtitle {
   font-size: 1.25rem;
   color: #e2d6f0 ;
