@@ -6,24 +6,24 @@
 // ============================================================
 const projects = [
   {
-    title: "Project One",
-    description: "A short description of what this project does and why you built it.",
-    tags: ["Python", "Flask"],
-    github: "https://github.com/yourusername/project-one",
+    title: "Chopping Block",
+    description: "A web game to teach kids about healthy eating and nutrition. Built with C# and Unity.",
+    tags: ["c#", "Unity"],
+    github: "https://github.com/kendall-hill/ChoppingBlock",
     demo: null,
   },
   {
-    title: "Project Two",
-    description: "Another project you're proud of. What problem did it solve?",
-    tags: ["JavaScript", "React"],
-    github: "https://github.com/yourusername/project-two",
-    demo: "https://yourproject.netlify.app",
+    title: "Data Dictionary",
+    description: "A comprehensive reference for database schema definitions.",
+    tags: ["Power Apps", "SQL", "Data Management" ,"Excel"],
+    github: null,
+    demo: null,
   },
   {
-    title: "Project Three",
-    description: "Keep it brief — one or two sentences is plenty.",
-    tags: ["Java", "Algorithms"],
-    github: "https://github.com/yourusername/project-three",
+    title: "Password Cracking",
+    description: "A project that demonstrates the use of John the Ripper and various algorithms to crack passwords.",
+    tags: ["JohnTheRipper", "Algorithms", "AI", "RockYou Dataset"],
+    github: null,
     demo: null,
   },
 ];
@@ -34,10 +34,9 @@ const projects = [
 // Ask Copilot to help format this list based on your resume.
 // ============================================================
 const skills = [
-  "Python", "JavaScript", "Java", "C",
+  "Python", "Java", "C",
   "HTML & CSS", "Git & GitHub",
-  "React", "Node.js",
-  "SQL", "Linux",
+, "Figma","SQL", "Linux", "Power BI", "Power Apps"
 ];
 
 // ============================================================
@@ -64,6 +63,75 @@ function renderProjects() {
     `
     )
     .join("");
+}
+
+// Jellyfish text dispersion effect
+function initJellyfishEffect() {
+  const container = document.getElementById("jellyfish-effect");
+  if (!container) return;
+
+  const chars = [];
+  let charIndex = 0;
+
+  // Fill container with jellyfish images
+  const containerWidth = container.clientWidth;
+  const containerHeight = container.clientHeight;
+  const charWidth = 50;
+  const charHeight = 50;
+
+  for (let y = 0; y < containerHeight; y += charHeight) {
+    for (let x = 0; x < containerWidth; x += charWidth) {
+      const img = document.createElement("img");
+      img.src = "images/jellyfish-icon.jpg";
+      img.className = "jellyfish-char";
+      img.style.width = charWidth + "px";
+      img.style.height = charHeight + "px";
+      img.style.left = x + "px";
+      img.style.top = y + "px";
+      container.appendChild(img);
+      chars.push({
+        element: img,
+        x: x,
+        y: y,
+        originalX: x,
+        originalY: y,
+      });
+      charIndex++;
+    }
+  }
+
+  // Track mouse and disperse jellyfishes
+  document.addEventListener("mousemove", (e) => {
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+    const disperseRadius = 150;
+
+    chars.forEach((char) => {
+      const heroRect = document.getElementById("hero").getBoundingClientRect();
+      const charScreenX = heroRect.left + char.x;
+      const charScreenY = heroRect.top + char.y;
+
+      const dx = mouseX - charScreenX;
+      const dy = mouseY - charScreenY;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+
+      if (distance < disperseRadius) {
+        const angle = Math.atan2(dy, dx);
+        const force = (disperseRadius - distance) / disperseRadius;
+        const pushX = Math.cos(angle) * force * 80;
+        const pushY = Math.sin(angle) * force * 80;
+
+        char.x = char.originalX - pushX;
+        char.y = char.originalY - pushY;
+      } else {
+        char.x += (char.originalX - char.x) * 0.1;
+        char.y += (char.originalY - char.y) * 0.1;
+      }
+
+      char.element.style.left = char.x + "px";
+      char.element.style.top = char.y + "px";
+    });
+  });
 }
 
 // ============================================================
@@ -107,28 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderProjects();
   renderSkills();
   updateYear();
-
-  const savedTheme = localStorage.getItem("theme");
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const initialTheme = savedTheme || (prefersDark ? "dark" : "light");
-
-  document.documentElement.setAttribute("data-theme", initialTheme);
-
-  const btn = document.getElementById("dark-mode-btn");
-  if (btn) {
-    btn.addEventListener("click", toggleDarkMode);
-    btn.textContent = initialTheme === "dark" ? "☀️" : "🌙";
-    btn.setAttribute(
-      "aria-label",
-      initialTheme === "dark" ? "Switch to light mode" : "Switch to dark mode"
-    );
-  }
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  renderProjects();
-  renderSkills();
-  updateYear();
+  initJellyfishEffect();
 
   const savedTheme = localStorage.getItem("theme");
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
