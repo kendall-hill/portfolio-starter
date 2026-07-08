@@ -187,6 +187,10 @@ a:hover {
 }
 
 :root[data-theme="dark"] .hero-name {
+  color: #b193d4;
+}
+
+:root[data-theme="dark"] .hero-name {
   color: #ffffff;
 }
 .hero-subtitle {
