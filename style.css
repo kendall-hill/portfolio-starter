@@ -24,7 +24,7 @@
   --color-text: #F5F7FA;
   --color-text-muted: #A8B3C7;
   --color-accent: #9175ae;;
-  --color-accent-hover: ##8B5CF6;
+  --color-accent-hover: #8B5CF6;
   --color-border:  #2C3650;
   --font-main: 'Segoe UI', system-ui, sans-serif;
   --radius: 10px;
@@ -183,7 +183,7 @@ a:hover {
 }
 
 .hero-name {
-  color: #b193d4;
+  color: white;
 }
 
 :root[data-theme="dark"] .hero-name {
@@ -191,7 +191,7 @@ a:hover {
 }
 .hero-subtitle {
   font-size: 1.25rem;
-  color: black (--color-text-muted);
+  color: #b193d4 (--color-text-muted);
   margin-bottom: 2rem;
 }
 
