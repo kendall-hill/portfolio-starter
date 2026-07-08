@@ -5,9 +5,9 @@
 :root {
   --color-bg: #F7F4FF;
   --color-bg-alt: #EFE8FA;
-  --color-text: #1F2430;
+  --color-text: #000000;
   --color-text-muted: #5F6B7A;
-  --color-accent:  #9175ae;
+  --color-accent:  #ffffff;
   --color-accent-hover: #654c81;
   --color-border: #E4DDF7;
   --font-main: 'Segoe UI', system-ui, sans-serif;
@@ -164,11 +164,6 @@ a:hover {
   max-width: 700px;
 }
 
-.hero-subtitle {
-  font-size: 1.25rem;
-  color: black;
-  margin-bottom: 2rem;
-}
 
 .hero h1 {
   font-size: clamp(2rem, 5vw, 3.5rem);
@@ -178,7 +173,7 @@ a:hover {
   color: #b193d4;
 }
 
-/* Dark mode: h1 text white */
+
 :root[data-theme="dark"] .hero h1 {
   color: #ffffff;
 }
