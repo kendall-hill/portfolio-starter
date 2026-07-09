@@ -113,6 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderProjects();
   renderSkills();
   updateYear();
+  initProfilePictureSpin();
 
   const savedTheme = localStorage.getItem("theme");
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -130,6 +131,80 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 });
+
+function initProfilePictureSpin() {
+  const profileImage = document.querySelector(".about-image");
+  if (!profileImage) return;
+
+  const spinProfilePicture = () => {
+    profileImage.classList.remove("is-spinning");
+    void profileImage.offsetWidth;
+    profileImage.classList.add("is-spinning");
+    emitCoinBurst(profileImage);
+  };
+
+  profileImage.addEventListener("pointerdown", spinProfilePicture);
+  profileImage.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      spinProfilePicture();
+    }
+  });
+
+  profileImage.addEventListener("animationend", () => {
+    profileImage.classList.remove("is-spinning");
+  });
+}
+
+function emitCoinBurst(sourceElement) {
+  const rect = sourceElement.getBoundingClientRect();
+  const startX = rect.left + rect.width / 2;
+  const startY = rect.top + rect.height / 2;
+  const coinCount = 12;
+
+  for (let index = 0; index < coinCount; index += 1) {
+    const coin = document.createElement("span");
+    coin.className = "coin-particle";
+    coin.textContent = "✿";
+
+    const size = 0.7 + Math.random() * 0.6;
+    const angle = Math.random() * Math.PI * 2;
+    const speed = 90 + Math.random() * 120;
+    const spin = (Math.random() > 0.5 ? 1 : -1) * (360 + Math.random() * 540);
+    const driftX = Math.cos(angle) * speed;
+    const driftY = Math.sin(angle) * speed - (80 + Math.random() * 40);
+    const duration = 900 + Math.random() * 500;
+
+    coin.style.width = `${size}rem`;
+    coin.style.height = `${size}rem`;
+    coin.style.left = `${startX}px`;
+    coin.style.top = `${startY}px`;
+
+    document.body.appendChild(coin);
+
+    const startTime = performance.now();
+
+    const animateCoin = (timestamp) => {
+      const elapsed = timestamp - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const x = startX + driftX * progress;
+      const y = startY + driftY * progress + 120 * progress * progress;
+      const rotation = spin * progress;
+      const scale = 1 - progress * 0.15;
+
+      coin.style.transform = `translate(${x - startX}px, ${y - startY}px) rotate(${rotation}deg) scale(${scale})`;
+      coin.style.opacity = String(1 - progress);
+
+      if (progress < 1) {
+        requestAnimationFrame(animateCoin);
+      } else {
+        coin.remove();
+      }
+    };
+
+    requestAnimationFrame(animateCoin);
+  }
+}
 
 
 // ============================================================

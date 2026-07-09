@@ -357,6 +357,8 @@ h2::after {
   overflow: hidden;
   border: 3px solid var(--color-border);
   background: var(--color-bg-alt);
+  cursor: pointer;
+  perspective: 900px;
 }
 
 .about-photo {
@@ -364,6 +366,48 @@ h2::after {
   height: 100%;
   object-fit: cover;
   display: block;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+}
+
+.about-image.is-spinning .about-photo {
+  animation: coinSpin 0.9s ease-in-out;
+}
+
+ .coin-particle {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 0.95rem;
+  height: 0.95rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--color-accent);
+  font-size: 0.95rem;
+  text-shadow: 0 0 6px rgba(107, 144, 128, 0.25);
+  pointer-events: none;
+  z-index: 999;
+  will-change: transform, opacity;
+}
+
+@keyframes coinSpin {
+  0% {
+    transform: rotateY(0deg) scale(1);
+  }
+  25% {
+    transform: rotateY(90deg) scale(0.9);
+  }
+  50% {
+    transform: rotateY(180deg) scale(1.05);
+  }
+  75% {
+    transform: rotateY(270deg) scale(0.9);
+  }
+  100% {
+    transform: rotateY(360deg) scale(1);
+  }
 }
 
 /* ============================================================
@@ -378,22 +422,12 @@ h2::after {
 .project-card {
   position: relative;
   overflow: hidden;
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  padding: 2rem 1.5rem;
-  box-shadow: none;
-  transition: transform var(--transition);
-}
-
-.project-card::before {
-  content: '';
-  position: absolute;
-  inset: -0.75rem -0.25rem;
-  background: url("images/plaque.png") center/100% 100% no-repeat;
-  opacity: 0.95;
-  transform: scale(1.08);
-  pointer-events: none;
+  background: var(--color-bg);
+  border: 2px solid var(--color-accent);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: transform var(--transition), box-shadow var(--transition);
 }
 
 .project-card > * {
@@ -402,7 +436,8 @@ h2::after {
 }
 
 .project-card:hover {
-  transform: translateY(-3px) scale(1.01);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(107, 144, 128, 0.18);
 }
 
 .project-card h3 {
@@ -414,6 +449,7 @@ h2::after {
 .project-card p {
   color: var(--color-text-muted);
   font-size: 0.95rem;
+  line-height: 1.7;
   margin-bottom: 1rem;
 }
 
@@ -493,6 +529,14 @@ h2::after {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+}
+
+.contact-cat {
+  display: block;
+  width: min(240px, 80vw);
+  margin: 2rem auto 0;
+  pointer-events: none;
+  user-select: none;
 }
 
 /* ============================================================
