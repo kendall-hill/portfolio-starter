@@ -11,14 +11,41 @@ button
   cursor: url("images/cursor.png"), auto;
 }
 
+a,
+a:hover,
+a:focus-visible,
+button:hover,
+button:focus-visible,
+.btn,
+.btn:hover,
+.btn:focus-visible,
+.btn-outline,
+.btn-outline:hover,
+.btn-outline:focus-visible,
+.dark-mode-toggle,
+.dark-mode-toggle:hover,
+.dark-mode-toggle:focus-visible {
+  cursor: url("images/cursor.png"), auto !important;
+}
+
    :root {
-  --color-bg: #e7e3f4;
-  --color-bg-alt: #e0d5f1;
-  --color-text: #000000;
-  --color-text-muted: #5F6B7A;
-  --color-accent:  rgb(102, 64, 144);
-  --color-accent-hover: #654c81;
-  --color-border: #E4DDF7;
+  --color-bg: var(--mint-cream);
+  --color-bg-alt: var(--azure-mist);
+  --color-text: var(--iron-grey);
+  --color-text-muted: rgba(74, 87, 89, 0.76);
+    --color-accent: #4f6f63;
+    --color-accent-hover: var(--jungle-teal);
+  --color-border: var(--frozen-water);
+  --cherry-blossom: #edafb8ff;
+  --powder-petal: #f7e1d7ff;
+  --dust-grey: #dedbd2ff;
+  --ash-grey: #b0c4b1ff;
+  --iron-grey: #4a5759ff;
+  --jungle-teal: #6b9080ff;
+  --muted-teal: #a4c3b2ff;
+  --frozen-water: #cce3deff;
+  --azure-mist: #eaf4f4ff;
+  --mint-cream: #f6fff8ff;
   --font-main: 'Segoe UI', system-ui, sans-serif;
   --radius: 10px;
   --shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
@@ -28,16 +55,16 @@ button
 /* Dark mode theme using CSS custom properties. Toggle by setting
   data-theme="dark" on the <html> or <body> element. */
 :root[data-theme="dark"] {
-  --color-bg: #121826;
-  --color-bg-alt: #0b1220;
-  --color-text: #F5F7FA;
-  --color-text-muted: #A8B3C7;
-  --color-accent: rgb(102, 64, 144);
-  --color-accent-hover: #654c81;
-  --color-border:  #2C3650;
+  --color-bg: #24413a;
+  --color-bg-alt: #355e52;
+  --color-text: var(--mint-cream);
+  --color-text-muted: rgba(246, 255, 248, 0.78);
+  --color-accent: var(--muted-teal);
+  --color-accent-hover: var(--frozen-water);
+  --color-border: #87a99a;
   --font-main: 'Segoe UI', system-ui, sans-serif;
   --radius: 10px;
-  --shadow: 0 4px 24px rgba(2,6,23,0.6);
+  --shadow: 0 4px 24px rgba(10, 3, 20, 0.72);
   --transition: 0.2s ease;
 }
 
@@ -55,7 +82,7 @@ button
 .dark-mode-toggle:hover {
   transform: translateY(-1px);
   background: var(--color-accent);
-  color: #fff;
+  color: var(--iron-grey);
 }
 
 /* ============================================================
@@ -138,7 +165,7 @@ a:hover {
   justify-content: center;
   text-align: center;
   padding: 4rem 2rem;
-  background: rgb(90, 37, 175);
+  background: linear-gradient(135deg, var(--frozen-water) 0%, var(--azure-mist) 50%, var(--ash-grey) 100%);
   position: relative;
   overflow: hidden;
 }
@@ -150,10 +177,11 @@ a:hover {
   left: 10%;
   width: 300px;
   height: 150px;
-  background: radial-gradient(ellipse 150px 75px at 50% 50%, rgba(196, 181, 253, 0.25), transparent 70%);
+  background: radial-gradient(ellipse 150px 75px at 50% 50%, rgba(107, 144, 128, 0.22), transparent 70%);
   border-radius: 50%;
   filter: blur(40px);
   pointer-events: none;
+  z-index: 0;
 }
 
 .hero::after {
@@ -163,28 +191,45 @@ a:hover {
   right: 15%;
   width: 350px;
   height: 180px;
-  background: radial-gradient(ellipse 175px 90px at 50% 50%, rgba(186, 155, 242, 0.2), transparent 70%);
+  background: radial-gradient(ellipse 175px 90px at 50% 50%, rgba(164, 195, 178, 0.3), transparent 70%);
   border-radius: 50%;
   filter: blur(50px);
   pointer-events: none;
+  z-index: 0;
 }
 
 .hero-content {
   max-width: 700px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-junimos {
+  position: absolute;
+  left: 50%;
+  bottom: 0.75rem;
+  width: min(42vw, 360px);
+  max-width: 100%;
+  height: auto;
+  transform: translateX(-50%);
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
 }
 
 
 .hero h1 {
+  position: relative;
   font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 800;
   margin-bottom: 1rem;
   line-height: 1.2;
-  color: #b193d4;
+  color: var(--iron-grey);
 }
 
 
 :root[data-theme="dark"] .hero h1 {
-  color: #ffffff;
+  color: var(--mint-cream);
 }
 
 .highlight {
@@ -192,33 +237,34 @@ a:hover {
 }
 
 .hero-name {
-  color: white;
+  color: var(--jungle-teal);
 }
 
 :root[data-theme="dark"] .hero-name {
-  color: #b193d4;
+  color: var(--frozen-water);
+}
+
+:root[data-theme="dark"] .hero {
+  background: linear-gradient(135deg, #24413a 0%, #32584f 48%, #6b9080 100%);
+}
+
+:root[data-theme="dark"] .hero::before {
+  background: radial-gradient(ellipse 150px 75px at 50% 50%, rgba(204, 227, 222, 0.28), transparent 70%);
+}
+
+:root[data-theme="dark"] .hero::after {
+  background: radial-gradient(ellipse 175px 90px at 50% 50%, rgba(246, 255, 248, 0.16), transparent 70%);
+}
+
+:root[data-theme="dark"] .hero-subtitle {
+  color: var(--mint-cream);
 }
 
 .hero-subtitle {
   font-size: 1.25rem;
-  color: #e2d6f0 ;
+  color: var(--iron-grey);
+  text-shadow: 0 1px 0 rgba(246, 255, 248, 0.36);
   margin-bottom: 2rem;
-}
-
-#jellyfish-effect {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.jellyfish-char {
-  position: absolute;
-  transition: all 0.1s ease-out;
-  opacity: 0.3;
 }
 
 /* ============================================================
@@ -228,7 +274,7 @@ a:hover {
   display: inline-block;
   padding: 0.75rem 1.75rem;
   background: var(--color-accent);
-  color: #fff !important;
+  color: #ffffff !important;
   border-radius: var(--radius);
   font-weight: 600;
   transition: background var(--transition), transform var(--transition);
@@ -247,7 +293,7 @@ a:hover {
 
 .btn-outline:hover {
   background: var(--color-accent);
-  color: #fff !important;
+  color: var(--iron-grey) !important;
 }
 
 /* ============================================================
@@ -330,17 +376,33 @@ h2::after {
 }
 
 .project-card {
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  box-shadow: var(--shadow);
-  transition: transform var(--transition), box-shadow var(--transition);
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 2rem 1.5rem;
+  box-shadow: none;
+  transition: transform var(--transition);
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  inset: -0.75rem -0.25rem;
+  background: url("images/plaque.png") center/100% 100% no-repeat;
+  opacity: 0.95;
+  transform: scale(1.08);
+  pointer-events: none;
+}
+
+.project-card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .project-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-3px) scale(1.01);
 }
 
 .project-card h3 {
@@ -369,7 +431,7 @@ h2::after {
   background: var(--color-bg-alt);
   border: 1px solid var(--color-border);
   border-radius: 999px;
-  color: var(--color-text-muted);
+  color: var(--color-accent);
 }
 
 .project-links {
@@ -392,20 +454,37 @@ h2::after {
 }
 
 .skill-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 5.5rem;
   padding: 0.5rem 1rem;
   background: var(--color-bg-alt);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius);
+  border: 2px solid var(--color-accent);
+  border-radius: 6px;
+  color: var(--color-text);
   font-size: 0.9rem;
   font-weight: 500;
-  /* TODO: Ask Copilot to add an emoji or icon prefix to each badge */
+  cursor: default;
+  transition: transform var(--transition), box-shadow var(--transition), background var(--transition), color var(--transition);
+}
+
+.skill-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(79, 111, 99, 0.18);
+  background: var(--color-bg);
+}
+
+.skill-badge:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
 }
 
 /* ============================================================
    CONTACT
    ============================================================ */
 .contact-intro {
-  color: var(--color-text-muted);
+  color: var(--iron-grey);
   margin-bottom: 2rem;
   font-size: 1.1rem;
 }
@@ -422,7 +501,7 @@ h2::after {
 footer {
   text-align: center;
   padding: 2rem;
-  color: var(--color-text-muted);
+  color: var(--iron-grey);
   font-size: 0.875rem;
   border-top: 1px solid var(--color-border);
 }
