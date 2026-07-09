@@ -167,7 +167,7 @@ function emitCoinBurst(sourceElement) {
     coin.className = "coin-particle";
     coin.textContent = "✿";
 
-    const size = 0.7 + Math.random() * 0.6;
+    const size = 1.05 + Math.random() * 0.85;
     const angle = Math.random() * Math.PI * 2;
     const speed = 90 + Math.random() * 120;
     const spin = (Math.random() > 0.5 ? 1 : -1) * (360 + Math.random() * 540);
