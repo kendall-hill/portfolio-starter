@@ -114,6 +114,9 @@ document.addEventListener("DOMContentLoaded", () => {
   renderSkills();
   updateYear();
   initProfilePictureSpin();
+  initCatInteraction();
+  initBlankApologyButton();
+
 
   const savedTheme = localStorage.getItem("theme");
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -218,3 +221,110 @@ function updateYear() {
 // ============================================================
 // INIT
 // ============================================================
+function initCatInteraction() {
+  const cat = document.querySelector(".contact-cat");
+  const page = document.body;
+
+  if (!cat) return;
+
+  let clickCount = 0;
+  let isCoolingDown = false;
+  const messageCooldownMs = 1800;
+
+  const messages = [
+    "He is not friendly don't pet him",
+    "He doesn't like strangers",
+    "Respect his personal space",
+    "Whats wrong with you? You can't just click a cat like that",
+  ];
+
+  const showCatMessage = (message) => {
+    const rect = cat.getBoundingClientRect();
+    const bubble = document.createElement("div");
+    bubble.className = "cat-message";
+    bubble.textContent = message;
+
+    bubble.style.left = `${rect.left + rect.width / 2}px`;
+    bubble.style.top = `${rect.top - 20}px`;
+
+    document.body.appendChild(bubble);
+
+    requestAnimationFrame(() => bubble.classList.add("is-visible"));
+
+    setTimeout(() => {
+      bubble.classList.remove("is-visible");
+      bubble.addEventListener("transitionend", () => bubble.remove(), { once: true });
+    }, 1500);
+  };
+
+  cat.addEventListener("click", () => {
+    if (isCoolingDown) return;
+
+    const message = messages[clickCount];
+    showCatMessage(message);
+
+    clickCount++;
+    isCoolingDown = true;
+
+    setTimeout(() => {
+      isCoolingDown = false;
+    }, messageCooldownMs);
+
+    if (clickCount === 4) {
+      // Fade out the entire page
+      page.classList.add("page-destroyed");
+
+      // Redirect to the blank fail-state page after the fade
+      setTimeout(() => {
+        window.location.href = "blank.html";
+      }, 900);
+
+      // Remove Milo from the page version
+      cat.classList.add("cat-hide");
+      setTimeout(() => cat.remove(), 400);
+    }
+  });
+}
+
+function initBlankApologyButton() {
+  const apologyBtn = document.getElementById("milo-apology-btn");
+  if (!apologyBtn) return;
+
+  apologyBtn.addEventListener("click", () => {
+    window.location.href = "index.html";
+  });
+
+  const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!hasFinePointer || reduceMotion) return;
+
+  let offsetX = 0;
+  let offsetY = 0;
+  const triggerDistance = 130;
+  const maxOffset = 110;
+
+  const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+
+  const handlePointerMove = (event) => {
+    const rect = apologyBtn.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const deltaX = centerX - event.clientX;
+    const deltaY = centerY - event.clientY;
+    const distance = Math.hypot(deltaX, deltaY);
+
+    if (distance > triggerDistance) return;
+
+    const safeDistance = distance || 0.001;
+    const intensity = (triggerDistance - safeDistance) / triggerDistance;
+    const push = 30 + intensity * 55;
+
+    offsetX = clamp(offsetX + (deltaX / safeDistance) * push, -maxOffset, maxOffset);
+    offsetY = clamp(offsetY + (deltaY / safeDistance) * push, -maxOffset, maxOffset);
+
+    apologyBtn.style.setProperty("--runaway-x", `${offsetX}px`);
+    apologyBtn.style.setProperty("--runaway-y", `${offsetY}px`);
+  };
+
+  document.addEventListener("pointermove", handlePointerMove);
+}

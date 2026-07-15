@@ -26,7 +26,7 @@
     ============================================================ -->
    <section class="hero" id="hero">
   <div class="hero-content">
-    <h1>Hello, I'm <span class="hero-name">Kendall Hill</span></h1>
+    <h1><span class="hero-greeting">Hello, I'm</span> <span class="hero-name">Kendall Hill</span></h1>
     <p class="hero-subtitle">Recent Information Technology graduate focused on crafting polished web experiences and solving real-world problems with clean code.</p>
     <a href="#projects" class="btn">See My Work</a>
   </div>
@@ -78,28 +78,40 @@
     <!-- ============================================================
          CONTACT
     ============================================================ -->
-    <section class="section section-alt" id="contact">
-      <h2>Get In Touch</h2>
+ <section class="section section-alt" id="contact">
+  <h2 id="contact-title">Get In Touch</h2>
+
+  <div class="contact-layout">
+    <div class="contact-content">
       <p class="contact-intro">
         I'm currently open to new opportunities. Feel free to reach out!
       </p>
+
       <div class="contact-links">
-        <!-- TODO: Add your real links -->
         <a href="mailto:kendall2.hill@famu.edu" class="btn">✉️ Email Me</a>
-        <a href="https://github.com/kendall-hill" class="btn btn-outline" target="_blank">
-          GitHub
-        </a>
-        <a href="https://linkedin.com/in/yourprofile" class="btn btn-outline" target="_blank">
-          LinkedIn
-        </a>
+        <a href="https://github.com/kendall-hill" class="btn btn-outline" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/yourprofile" class="btn btn-outline" target="_blank">LinkedIn</a>
       </div>
-      <img src="images/cat_waving.gif" alt="Waving cat animation" class="contact-cat" />
-    </section>
+    </div>
+
+    <div class="contact-visual">
+      <div class="contact-arrow" aria-hidden="true">➡️</div>
+      <div class="milo-wrapper">
+        <img src="images/cat_waving.gif" alt="Waving cat animation" class="contact-cat" />
+        <p class="milo-caption">This is Milo, say hi!</p>
+        <p class="milo-treat hidden">Give Milo a treat and maybe he'll be nice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
     <footer>
       <p>Built with GitHub Copilot &amp; GitHub Pages · <span id="year"></span></p>
     </footer>
 
     <script src="script.js"></script>
+
+
   </body>
 </html>
