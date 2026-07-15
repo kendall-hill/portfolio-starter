@@ -12,7 +12,12 @@
     ============================================================ -->
     <nav class="navbar">
       <span class="nav-logo">Kendall Hill</span>
-      <ul class="nav-links">
+      <button class="hamburger" id="hamburger-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#skills">Skills</a></li>
@@ -79,7 +84,18 @@
          CONTACT
     ============================================================ -->
  <section class="section section-alt" id="contact">
-  <h2 id="contact-title">Get In Touch</h2>
+  <div class="contact-heading-row">
+    <h2 id="contact-title">Get In Touch</h2>
+
+    <div class="contact-visual contact-visual-heading">
+      <div class="contact-arrow" aria-hidden="true">➡️</div>
+      <div class="milo-wrapper">
+        <img src="images/cat_waving.gif" alt="Waving cat animation" class="contact-cat" />
+        <p class="milo-caption">This is Milo, say hi!</p>
+        <p class="milo-treat hidden">Give Milo a treat and maybe he'll be nice.</p>
+      </div>
+    </div>
+  </div>
 
   <div class="contact-layout">
     <div class="contact-content">
@@ -91,15 +107,6 @@
         <a href="mailto:kendall2.hill@famu.edu" class="btn">✉️ Email Me</a>
         <a href="https://github.com/kendall-hill" class="btn btn-outline" target="_blank">GitHub</a>
         <a href="https://linkedin.com/in/yourprofile" class="btn btn-outline" target="_blank">LinkedIn</a>
-      </div>
-    </div>
-
-    <div class="contact-visual">
-      <div class="contact-arrow" aria-hidden="true">➡️</div>
-      <div class="milo-wrapper">
-        <img src="images/cat_waving.gif" alt="Waving cat animation" class="contact-cat" />
-        <p class="milo-caption">This is Milo, say hi!</p>
-        <p class="milo-treat hidden">Give Milo a treat and maybe he'll be nice.</p>
       </div>
     </div>
   </div>

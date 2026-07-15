@@ -31,11 +31,20 @@ button:focus-visible,
    :root {
     --color-bg: #fdfdfd;
     --color-bg-alt: #effcf4;
+    --color-surface: #f8fcff;
+    --color-surface-alt: #effcf4;
+    --color-hero-bg: #dff6ea;
     --color-text: #355e52;
     --color-text-muted: rgba(53, 94, 82, 0.74);
     --color-accent: #4f6f63;
     --color-accent-hover: #6b9080;
     --color-border: #7addc9;
+    --color-heading: #24413a;
+    --color-heading-accent: #f69ed2;
+    --color-heading-accent-strong: #f6c3f4;
+    --color-copy: #355e52;
+    --color-copy-strong: #4f6f63;
+    --color-panel: #fdfdfd;
     --cherry-blossom: #f6c3f4;
     --powder-petal: #fff6b3;
     --dust-grey: #effcf4;
@@ -55,17 +64,31 @@ button:focus-visible,
 /* Dark mode theme using CSS custom properties. Toggle by setting
   data-theme="dark" on the <html> or <body> element. */
 :root[data-theme="dark"] {
-  --color-bg: #24413a;
-  --color-bg-alt: #355e52;
-  --color-text: #f8fcff;
-  --color-text-muted: rgba(248, 252, 255, 0.78);
-  --color-accent: #7addc9;
-  --color-accent-hover: #a8f2f8;
-  --color-border: #6b9080;
+  --color-bg: #21131d;
+  --color-bg-alt: #2f1a29;
+  --color-surface: #1a1017;
+  --color-surface-alt: #2b1824;
+  --color-hero-bg: #26141f;
+  --color-text: #fdf7fb;
+  --color-text-muted: rgba(253, 247, 251, 0.78);
+  --color-accent: #fff6b3;
+  --color-accent-hover: #f6c3f4;
+  --color-border: #f69ed2;
+  --color-heading: #fdf7fb;
+  --color-heading-accent: #fff6b3;
+  --color-heading-accent-strong: #f6c3f4;
+  --color-copy: #f7ddeb;
+  --color-copy-strong: #fff6b3;
+  --color-panel: #2b1824;
   --font-main: 'Segoe UI', system-ui, sans-serif;
   --radius: 10px;
-  --shadow: 0 4px 24px rgba(10, 3, 20, 0.72);
+  --shadow: 0 4px 24px rgba(8, 5, 12, 0.72);
   --transition: 0.2s ease;
+}
+
+:root[data-theme="dark"] .hero .btn {
+  background: #d2b34a;
+  color: #21131d !important;
 }
 
 .dark-mode-toggle {
@@ -82,7 +105,7 @@ button:focus-visible,
 .dark-mode-toggle:hover {
   transform: translateY(-1px);
   background: var(--color-accent);
-  color: var(--iron-grey);
+  color: var(--color-heading);
 }
 
 /* ============================================================
@@ -151,8 +174,69 @@ a:hover {
   color: var(--color-accent);
 }
 
-/* TODO: The nav isn't responsive on mobile yet.
-   Ask Copilot: "Make this navbar collapse into a hamburger menu on small screens" */
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  gap: 6px;
+  margin-right: 1rem;
+}
+
+.hamburger-line {
+  width: 24px;
+  height: 3px;
+  background: var(--color-text);
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+.hamburger.is-active .hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translate(10px, 10px);
+}
+
+.hamburger.is-active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.is-active .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translate(8px, -8px);
+}
+
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+  
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-bg);
+    flex-direction: column;
+    gap: 0;
+    border-bottom: 1px solid var(--color-border);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  
+  .nav-links.is-active {
+    max-height: 300px;
+  }
+  
+  .nav-links li {
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  
+  .nav-links a {
+    display: block;
+  }
+}
 
 /* ============================================================
    HERO
@@ -164,7 +248,7 @@ a:hover {
   justify-content: center;
   text-align: center;
   padding: 4rem 2rem;
-  background: #dff6ea;
+  background: var(--color-hero-bg);
   position: relative;
   overflow: hidden;
 }
@@ -203,42 +287,26 @@ a:hover {
   font-weight: 800;
   margin-bottom: 1rem;
   line-height: 1.2;
-  color: var(--color-text);
+  color: var(--color-heading);
 }
 
 .hero-greeting {
-  color: #24413a;
+  color: var(--color-heading);
 }
 
-
-:root[data-theme="dark"] .hero h1 {
-  color: var(--mint-cream);
-}
 
 .highlight {
   color: var(--color-accent);
 }
 
 .hero-name {
-  color: #f69ed2;
-}
-
-:root[data-theme="dark"] .hero-name {
-  color: #f6c3f4;
-}
-
-:root[data-theme="dark"] .hero {
-  background: #355e52;
-}
-
-:root[data-theme="dark"] .hero-subtitle {
-  color: var(--mint-cream);
+  color: var(--color-heading-accent);
 }
 
 .hero-subtitle {
   font-size: 1.25rem;
   color: var(--color-text-muted);
-  text-shadow: 0 1px 0 rgba(246, 255, 248, 0.36);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.18);
   margin-bottom: 2rem;
 }
 
@@ -278,7 +346,7 @@ a:hover {
   padding: 5rem 2rem;
   max-width: 1000px;
   margin: 0 auto;
-  background: #f8fcff;
+  background: var(--color-surface);
 }
 
 #about.section {
@@ -292,7 +360,7 @@ a:hover {
 }
 
 .section-alt {
-  background: #effcf4;
+  background: var(--color-surface-alt);
   max-width: 100%;
   padding: 5rem 2rem;
 }
@@ -301,7 +369,7 @@ a:hover {
 #contact.section-alt {
   position: relative;
   overflow: hidden;
-  background: #effcf4;
+  background: var(--color-surface-alt);
 }
 
 .section-alt > * {
@@ -381,7 +449,7 @@ h2::after {
   background: transparent;
   color: var(--color-accent);
   font-size: 1.35rem;
-  text-shadow: 0 0 6px rgba(193, 136, 189, 0.25);
+  text-shadow: 0 0 6px rgba(246, 195, 244, 0.25);
   pointer-events: none;
   z-index: 999;
   will-change: transform, opacity;
@@ -417,7 +485,7 @@ h2::after {
 .project-card {
   position: relative;
   overflow: hidden;
-  background: #fdfdfd;
+  background: var(--color-panel);
   border: 2px solid var(--color-border);
   border-radius: var(--radius);
   padding: 1.5rem;
@@ -459,7 +527,7 @@ h2::after {
   font-size: 0.75rem;
   font-weight: 600;
   padding: 0.2rem 0.6rem;
-  background: #effcf4;
+  background: var(--color-surface-alt);
   border: 1px solid var(--color-border);
   border-radius: 999px;
   color: var(--color-text);
@@ -489,21 +557,24 @@ h2::after {
   align-items: center;
   justify-content: center;
   min-width: 5.5rem;
-  padding: 0.5rem 1rem;
-  background: #fdfdfd;
+  padding: 0.35rem 0.85rem;
+  background: var(--color-panel);
   border: 2px solid var(--color-border);
-  border-radius: 6px;
+  border-radius: 14px;
   color: var(--color-text);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 500;
   cursor: default;
-  transition: transform var(--transition), box-shadow var(--transition), background var(--transition), color var(--transition);
+  line-height: 1;
+  box-shadow: none;
+  letter-spacing: 0.01em;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
 }
 
 .skill-badge:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(122, 221, 201, 0.22);
-  background: var(--color-bg);
+  background: var(--color-surface-alt);
+  color: var(--color-accent);
+  border-color: var(--color-accent);
 }
 
 .skill-badge:focus-visible {
@@ -518,6 +589,18 @@ h2::after {
   color: var(--color-text);
   margin-bottom: 2rem;
   font-size: 1.1rem;
+}
+
+.contact-heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.contact-heading-row h2 {
+  margin-bottom: 0;
 }
 
 .contact-links {
@@ -545,6 +628,11 @@ h2::after {
   min-width: min(280px, 36vw);
 }
 
+.contact-visual-heading {
+  min-width: 0;
+  flex-shrink: 0;
+}
+
 .contact-arrow {
   position: absolute;
   left: -3.25rem;
@@ -568,21 +656,25 @@ h2::after {
   cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext x='2' y='24' font-size='22'%3E%F0%9F%91%89%3C/text%3E%3C/svg%3E") 4 0, pointer;
 }
 
+.contact-visual-heading .contact-cat {
+  width: min(180px, 34vw);
+}
+
 /* ============================================================
    FOOTER
    ============================================================ */
 footer {
   text-align: center;
   padding: 2rem;
-  color: var(--iron-grey);
+  color: var(--color-copy);
   font-size: 0.875rem;
   border-top: 1px solid var(--color-border);
 }
 
 /* ============================================================
    RESPONSIVE
-   TODO: This is a start, but there's more to do on mobile.
-   Ask Copilot: "Improve the responsive styles for screens under 600px"
+   Optimized for screens under 600px with hamburger menu,
+   single-column layouts, and adjusted typography.
    ============================================================ */
 @media (max-width: 768px) {
   .about-grid {
@@ -593,10 +685,20 @@ footer {
     grid-template-columns: 1fr;
   }
 
+  .contact-heading-row {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+
   .contact-visual {
-    justify-content: flex-start;
+    justify-content: center;
     min-width: 0;
-    padding-left: 1rem;
+    padding-left: 0;
+  }
+
+  .contact-visual-heading {
+    align-self: flex-end;
   }
 
   .contact-arrow {
@@ -614,6 +716,202 @@ footer {
   .avatar-placeholder {
     width: 20px;
     height: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  /* ---- Navigation ---- */
+  .navbar {
+    padding: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .nav-logo {
+    font-size: 1rem;
+  }
+
+  .dark-mode-toggle {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  /* ---- Hero Section ---- */
+  .hero {
+    min-height: 60vh;
+    padding: 2rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    margin-bottom: 1rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-junimos {
+    width: min(35vw, 200px);
+    bottom: 0.5rem;
+  }
+
+  /* ---- Sections ---- */
+  .section {
+    padding: 3rem 1rem;
+  }
+
+  .section-alt {
+    padding: 3rem 1rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ---- About Section ---- */
+  .about-grid {
+    gap: 1.5rem;
+  }
+
+  .about-image {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+  }
+
+  .about-text p {
+    font-size: 0.95rem;
+  }
+
+  /* ---- Projects Grid (Single Column) ---- */
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .project-card {
+    padding: 1.25rem;
+  }
+
+  .project-card h3 {
+    font-size: 1rem;
+  }
+
+  .project-card p {
+    font-size: 0.9rem;
+  }
+
+  /* ---- Skills Section ---- */
+  .skills-container {
+    gap: 0.5rem;
+  }
+
+  .skill-badge {
+    min-width: auto;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+    border-radius: 12px;
+  }
+
+  /* ---- Contact Section ---- */
+  .contact-intro {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-links {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .contact-links a {
+    width: 100%;
+    text-align: center;
+  }
+
+  .contact-visual-heading .contact-cat {
+    width: min(160px, 44vw);
+  }
+
+  .contact-visual {
+    padding-left: 0;
+    margin-top: 1.5rem;
+  }
+
+  .contact-arrow {
+    display: none;
+  }
+
+  .contact-cat {
+    width: min(200px, 70vw);
+  }
+
+  .milo-wrapper {
+    width: 100%;
+  }
+
+  /* ---- Footer ---- */
+  footer {
+    padding: 1.5rem;
+    font-size: 0.8rem;
+  }
+
+  /* ---- Buttons ---- */
+  .btn {
+    padding: 0.65rem 1.5rem;
+    font-size: 0.95rem;
+  }
+
+  .btn-outline {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra small devices */
+  .navbar {
+    padding: 0.75rem;
+  }
+
+  .nav-logo {
+    font-size: 0.95rem;
+  }
+
+  .hero {
+    min-height: 50vh;
+    padding: 1.5rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.25rem, 3.5vw, 2rem);
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+
+  h2 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .section {
+    padding: 2rem 1rem;
+  }
+
+  .section-alt {
+    padding: 2rem 1rem;
+  }
+
+  .project-card {
+    padding: 1rem;
+  }
+
+  .btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
   }
 }
 
@@ -662,7 +960,7 @@ footer {
 .milo-caption {
   margin-top: 0.5rem;
   font-size: 0.9rem;
-  color: var(--iron-grey);
+  color: var(--color-copy);
 }
 
 .shredded {
@@ -762,8 +1060,8 @@ footer {
   font-size: clamp(1.4rem, 3.5vw, 2.3rem);
   font-weight: 800;
   text-align: center;
-  color: #355e52;
-  text-shadow: 0 2px 0 rgba(248, 252, 255, 0.55);
+  color: var(--color-heading);
+  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.55);
 }
 
 .milo-sub-message {
@@ -771,7 +1069,7 @@ footer {
   font-size: clamp(1rem, 2.2vw, 1.3rem);
   font-weight: 600;
   text-align: center;
-  color: #4f6f63;
+  color: var(--color-copy-strong);
 }
 
 .milo-box {

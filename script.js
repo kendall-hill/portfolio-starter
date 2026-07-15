@@ -109,6 +109,31 @@ function toggleDarkMode() {
   }
 }
 
+// ============================================================
+// HAMBURGER MENU TOGGLE
+// ============================================================
+function toggleHamburgerMenu() {
+  const hamburger = document.getElementById("hamburger-btn");
+  const navLinks = document.getElementById("nav-links");
+  
+  if (hamburger && navLinks) {
+    hamburger.classList.toggle("is-active");
+    navLinks.classList.toggle("is-active");
+    hamburger.setAttribute("aria-expanded", hamburger.classList.contains("is-active"));
+  }
+}
+
+function closeHamburgerMenu() {
+  const hamburger = document.getElementById("hamburger-btn");
+  const navLinks = document.getElementById("nav-links");
+  
+  if (hamburger && navLinks) {
+    hamburger.classList.remove("is-active");
+    navLinks.classList.remove("is-active");
+    hamburger.setAttribute("aria-expanded", false);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   renderProjects();
   renderSkills();
@@ -117,6 +142,17 @@ document.addEventListener("DOMContentLoaded", () => {
   initCatInteraction();
   initBlankApologyButton();
 
+  // Initialize hamburger menu
+  const hamburger = document.getElementById("hamburger-btn");
+  if (hamburger) {
+    hamburger.addEventListener("click", toggleHamburgerMenu);
+  }
+
+  // Close menu when clicking on a nav link
+  const navLinks = document.querySelectorAll(".nav-links a");
+  navLinks.forEach((link) => {
+    link.addEventListener("click", closeHamburgerMenu);
+  });
 
   const savedTheme = localStorage.getItem("theme");
   const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
